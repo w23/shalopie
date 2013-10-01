@@ -7,21 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E167AAC51789B7BB0047DF38 /* RectalDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E167AAC31789B7BB0047DF38 /* RectalDrawer.cpp */; };
-		E167AAC81789B91D0047DF38 /* TextLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E167AAC61789B91D0047DF38 /* TextLine.cpp */; };
+		E11F568A17F6EE8100BF93FB /* libkapusha_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E11F568917F6EBFC00BF93FB /* libkapusha_main.a */; };
 		E1C64A7B17873A270027CA3C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64A7A17873A270027CA3C /* Cocoa.framework */; };
 		E1C64A8517873A270027CA3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C64A8317873A270027CA3C /* InfoPlist.strings */; };
-		E1C64A8717873A270027CA3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C64A8617873A270027CA3C /* main.m */; };
-		E1C64A8B17873A270027CA3C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E1C64A8917873A270027CA3C /* Credits.rtf */; };
-		E1C64A8E17873A270027CA3C /* SPAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1C64A8D17873A270027CA3C /* SPAppDelegate.mm */; };
-		E1C64A9117873A270027CA3C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C64A8F17873A270027CA3C /* MainMenu.xib */; };
 		E1C64AAC17873CD30027CA3C /* libkapusha.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64AA717873C920027CA3C /* libkapusha.a */; };
-		E1C64AB017873F4A0027CA3C /* Viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C64AAE17873F4A0027CA3C /* Viewport.cpp */; };
-		E1C64AB51787480C0027CA3C /* Editerranean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C64AB31787480C0027CA3C /* Editerranean.cpp */; };
 		E1C64AB717896D290027CA3C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64AB617896D290027CA3C /* OpenGL.framework */; };
+		E1F5899617FB338F00548AB8 /* Viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5899417FB338F00548AB8 /* Viewport.cpp */; };
+		E1F5899817FB33CD00548AB8 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5899717FB33CD00548AB8 /* App.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E11F568817F6EBFC00BF93FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E10A64B317BE888C004B68C4;
+			remoteInfo = "kapusha-osx-main";
+		};
 		E1C64AA017873C920027CA3C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */;
@@ -64,32 +66,28 @@
 			remoteGlobalIDString = E197CBF216B3AD88003FDEF6;
 			remoteInfo = "kapusha-glut";
 		};
+		E1F5899217FB333400548AB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1F5898017FA0D3300548AB8;
+			remoteInfo = "osx-demo-terrain";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E167AAC31789B7BB0047DF38 /* RectalDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectalDrawer.cpp; sourceTree = "<group>"; };
-		E167AAC41789B7BB0047DF38 /* RectalDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectalDrawer.h; sourceTree = "<group>"; };
-		E167AAC61789B91D0047DF38 /* TextLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextLine.cpp; sourceTree = "<group>"; };
-		E167AAC71789B91D0047DF38 /* TextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextLine.h; sourceTree = "<group>"; };
-		E1C64A7717873A270027CA3C /* sharopie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = sharopie.app; path = Sharopie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1C64A7717873A270027CA3C /* Sharopie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharopie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C64A7A17873A270027CA3C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E1C64A7D17873A270027CA3C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E1C64A7E17873A270027CA3C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1C64A7F17873A270027CA3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E1C64A8217873A270027CA3C /* sharopie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sharopie-Info.plist"; sourceTree = "<group>"; };
 		E1C64A8417873A270027CA3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E1C64A8617873A270027CA3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E1C64A8817873A270027CA3C /* sharopie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sharopie-Prefix.pch"; sourceTree = "<group>"; };
-		E1C64A8A17873A270027CA3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		E1C64A8C17873A270027CA3C /* SPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAppDelegate.h; sourceTree = "<group>"; };
-		E1C64A8D17873A270027CA3C /* SPAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SPAppDelegate.mm; sourceTree = "<group>"; };
-		E1C64A9017873A270027CA3C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kapusha.xcodeproj; path = 3p/kapusha/Kapusha.xcodeproj; sourceTree = "<group>"; };
-		E1C64AAE17873F4A0027CA3C /* Viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Viewport.cpp; sourceTree = "<group>"; };
-		E1C64AAF17873F4A0027CA3C /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viewport.h; sourceTree = "<group>"; };
-		E1C64AB31787480C0027CA3C /* Editerranean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Editerranean.cpp; sourceTree = "<group>"; };
-		E1C64AB41787480C0027CA3C /* Editerranean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Editerranean.h; sourceTree = "<group>"; };
 		E1C64AB617896D290027CA3C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E1F5899417FB338F00548AB8 /* Viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Viewport.cpp; path = sharopie/Viewport.cpp; sourceTree = SOURCE_ROOT; };
+		E1F5899517FB338F00548AB8 /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Viewport.h; path = sharopie/Viewport.h; sourceTree = SOURCE_ROOT; };
+		E1F5899717FB33CD00548AB8 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = App.cpp; path = sharopie/App.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +95,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1C64AB717896D290027CA3C /* OpenGL.framework in Frameworks */,
+				E11F568A17F6EE8100BF93FB /* libkapusha_main.a in Frameworks */,
 				E1C64AAC17873CD30027CA3C /* libkapusha.a in Frameworks */,
+				E1C64AB717896D290027CA3C /* OpenGL.framework in Frameworks */,
 				E1C64A7B17873A270027CA3C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,9 +108,8 @@
 		E1C64A6E17873A270027CA3C = {
 			isa = PBXGroup;
 			children = (
-				E1C64AB2178747D50027CA3C /* editerranean */,
-				E1C64AAD17873F000027CA3C /* viewport */,
 				E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */,
+				E1C64AAD17873F000027CA3C /* shalopie */,
 				E1C64A8017873A270027CA3C /* sharopie-osx */,
 				E1C64A7917873A270027CA3C /* Frameworks */,
 				E1C64A7817873A270027CA3C /* Products */,
@@ -121,7 +119,7 @@
 		E1C64A7817873A270027CA3C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1C64A7717873A270027CA3C /* sharopie.app */,
+				E1C64A7717873A270027CA3C /* Sharopie.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,9 +147,6 @@
 		E1C64A8017873A270027CA3C /* sharopie-osx */ = {
 			isa = PBXGroup;
 			children = (
-				E1C64A8C17873A270027CA3C /* SPAppDelegate.h */,
-				E1C64A8D17873A270027CA3C /* SPAppDelegate.mm */,
-				E1C64A8F17873A270027CA3C /* MainMenu.xib */,
 				E1C64A8117873A270027CA3C /* Supporting Files */,
 			);
 			name = "sharopie-osx";
@@ -163,9 +158,6 @@
 			children = (
 				E1C64A8217873A270027CA3C /* sharopie-Info.plist */,
 				E1C64A8317873A270027CA3C /* InfoPlist.strings */,
-				E1C64A8617873A270027CA3C /* main.m */,
-				E1C64A8817873A270027CA3C /* sharopie-Prefix.pch */,
-				E1C64A8917873A270027CA3C /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -175,36 +167,25 @@
 			children = (
 				E1C64AA117873C920027CA3C /* libkapusha.a */,
 				E1C64AA317873C920027CA3C /* samples-ios.app */,
-				E1C64AA517873C920027CA3C /* kapusha-samples.app */,
 				E1C64AA717873C920027CA3C /* libkapusha.a */,
 				E1C64AA917873C920027CA3C /* libkapushacore.a */,
 				E1C64AAB17873C920027CA3C /* libkapusha-glut.a */,
+				E11F568917F6EBFC00BF93FB /* libkapusha_main.a */,
+				E1C64AA517873C920027CA3C /* demo-dust.app */,
+				E1F5899317FB333400548AB8 /* osx-demo-terrain.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E1C64AAD17873F000027CA3C /* viewport */ = {
+		E1C64AAD17873F000027CA3C /* shalopie */ = {
 			isa = PBXGroup;
 			children = (
-				E1C64AAE17873F4A0027CA3C /* Viewport.cpp */,
-				E1C64AAF17873F4A0027CA3C /* Viewport.h */,
+				E1F5899417FB338F00548AB8 /* Viewport.cpp */,
+				E1F5899517FB338F00548AB8 /* Viewport.h */,
+				E1F5899717FB33CD00548AB8 /* App.cpp */,
 			);
-			name = viewport;
+			name = shalopie;
 			path = src/viewport;
-			sourceTree = "<group>";
-		};
-		E1C64AB2178747D50027CA3C /* editerranean */ = {
-			isa = PBXGroup;
-			children = (
-				E1C64AB31787480C0027CA3C /* Editerranean.cpp */,
-				E1C64AB41787480C0027CA3C /* Editerranean.h */,
-				E167AAC31789B7BB0047DF38 /* RectalDrawer.cpp */,
-				E167AAC41789B7BB0047DF38 /* RectalDrawer.h */,
-				E167AAC61789B91D0047DF38 /* TextLine.cpp */,
-				E167AAC71789B91D0047DF38 /* TextLine.h */,
-			);
-			name = editerranean;
-			path = src/editerranean;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +205,7 @@
 			);
 			name = Sharopie;
 			productName = sharopie;
-			productReference = E1C64A7717873A270027CA3C /* sharopie.app */;
+			productReference = E1C64A7717873A270027CA3C /* Sharopie.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -261,6 +242,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		E11F568917F6EBFC00BF93FB /* libkapusha_main.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libkapusha_main.a;
+			remoteRef = E11F568817F6EBFC00BF93FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E1C64AA117873C920027CA3C /* libkapusha.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -275,10 +263,10 @@
 			remoteRef = E1C64AA217873C920027CA3C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E1C64AA517873C920027CA3C /* kapusha-samples.app */ = {
+		E1C64AA517873C920027CA3C /* demo-dust.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			path = "kapusha-samples.app";
+			path = "demo-dust.app";
 			remoteRef = E1C64AA417873C920027CA3C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -303,6 +291,13 @@
 			remoteRef = E1C64AAA17873C920027CA3C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E1F5899317FB333400548AB8 /* osx-demo-terrain.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "osx-demo-terrain.app";
+			remoteRef = E1F5899217FB333400548AB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -311,8 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1C64A8517873A270027CA3C /* InfoPlist.strings in Resources */,
-				E1C64A8B17873A270027CA3C /* Credits.rtf in Resources */,
-				E1C64A9117873A270027CA3C /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,12 +316,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1C64A8717873A270027CA3C /* main.m in Sources */,
-				E1C64A8E17873A270027CA3C /* SPAppDelegate.mm in Sources */,
-				E1C64AB017873F4A0027CA3C /* Viewport.cpp in Sources */,
-				E1C64AB51787480C0027CA3C /* Editerranean.cpp in Sources */,
-				E167AAC51789B7BB0047DF38 /* RectalDrawer.cpp in Sources */,
-				E167AAC81789B91D0047DF38 /* TextLine.cpp in Sources */,
+				E1F5899617FB338F00548AB8 /* Viewport.cpp in Sources */,
+				E1F5899817FB33CD00548AB8 /* App.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,22 +330,6 @@
 				E1C64A8417873A270027CA3C /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		E1C64A8917873A270027CA3C /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E1C64A8A17873A270027CA3C /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		E1C64A8F17873A270027CA3C /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E1C64A9017873A270027CA3C /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -425,8 +398,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "sharopie/sharopie-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/3p/kapusha";
@@ -440,8 +411,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "sharopie/sharopie-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/3p/kapusha";
