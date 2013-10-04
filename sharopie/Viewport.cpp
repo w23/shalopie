@@ -43,7 +43,6 @@ void Viewport::resize(vec2i size) {
 }
 
 void Viewport::draw(int ms, float dt) {
-  
   char buffer[65536];;
   Socket::Address remote;
   u32 recv = socket_.recv_from(remote, buffer, sizeof(buffer) - 1);

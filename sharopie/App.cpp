@@ -4,7 +4,7 @@
 class ViewportFactory : public IViewportFactory {
 public:
   ViewportFactory() {
-    p_.window_title = "Shalopie";
+    p_.window_title = "Shalolpipe";
     p_.flags = Preferences::FlagOpenGL2_1 | Preferences::FlagOpenGLES2;
   }
   virtual IViewport *create(IViewportController *controller) const {
