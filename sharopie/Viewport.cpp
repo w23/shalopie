@@ -6,7 +6,6 @@ const char *Viewport::s_vertex_shader_ =
     "gl_Position = av4_vertex;\n"
   "}";
 
-
 Viewport::Viewport(IViewportController *controller)
 : controller_(controller) {
   socket_.bind(Socket::Address(5470));
@@ -25,36 +24,43 @@ Viewport::Viewport(IViewportController *controller)
     vec2f( 1.f,  1.f),
     vec2f( 1.f, -1.f)
   };
-  
-  Buffer *buf_rect = new Buffer();
+
+  render::Buffer *buf_rect = new render::Buffer();
   buf_rect->load(rect, sizeof rect);
-  Program *prog = new Program(s_vertex_shader_, shader_fragment);
-  
-  fullscreen_ = new Batch();
-  fullscreen_->setMaterial(new Material(prog));
-  fullscreen_->setAttribSource("av4_vertex", buf_rect, 2);
-  fullscreen_->setGeometry(Batch::GeometryTriangleStrip, 0, 4);
+
+  render::shader_t sh_vertex(s_vertex_shader_, render::shader_t::type_e::vertex);
+  render::shader_t sh_fragment(shader_fragment, render::shader_t::type_e::fragment);
+  render::Program *prog = new render::Program(sh_vertex, sh_fragment);
+
+  fullscreen_ = new render::Batch();
+  fullscreen_->set_material(new render::Material(prog));
+  fullscreen_->set_attrib_source("av4_vertex", buf_rect, 2);
+  fullscreen_->set_geometry(render::Batch::Geometry::TriangleStrip, 0, 4);
 }
 
 void Viewport::resize(vec2i size) {
   size_ = size;
   glViewport(0, 0, size_.x, size_.y);
-  fullscreen_->getMaterial()->setUniform("uv2_resolution", vec2f(size_));
+  fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_));
 }
 
 void Viewport::draw(int ms, float dt) {
-  char buffer[65536];;
+  char buffer[65536];
   Socket::Address remote;
   u32 recv = socket_.recv_from(remote, buffer, sizeof(buffer) - 1);
   if (recv) {
     buffer[recv] = 0;
-    SProgram new_prog(new Program(s_vertex_shader_, buffer, Program::TolerateInvalid));
-    if (new_prog->valid()) {
-      fullscreen_->setMaterial(new Material(new_prog.get()));
-      fullscreen_->getMaterial()->setUniform("uv2_resolution", vec2f(size_));
+
+    render::shader_t sh_vertex(s_vertex_shader_, render::shader_t::type_e::vertex);
+    render::shader_t sh_fragment(buffer, render::shader_t::type_e::fragment);
+    render::Program *prog = new render::Program(sh_vertex, sh_fragment);
+    if (*prog) {
+      fullscreen_->set_material(new render::Material(prog));
+      fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_));
     }
   }
-  
-  fullscreen_->getMaterial()->setUniform("uf_time", ms / 1000.f);
+
+  fullscreen_->material()->set_uniform("uf_time", ms / 1000.f);
   fullscreen_->draw();
 }
+

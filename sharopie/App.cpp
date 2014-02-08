@@ -1,7 +1,7 @@
-#include <kapusha/app.h>
+#include <kapusha/sys.h>
 #include "Viewport.h"
 
-class ViewportFactory : public IViewportFactory {
+class ViewportFactory : public kapusha::IViewportFactory {
 public:
   ViewportFactory() {
     p_.window_title = "Shalolpipe";
@@ -15,10 +15,7 @@ private:
   Preferences p_;
 };
 
-ViewportFactory the_factory;
-
-namespace kapusha {
-  Application the_application = {
-    &the_factory
-  };
-} // namespace kapusha
+const kapusha::IViewportFactory *kapusha_main(kapusha::core::StringArray *args) {
+  static const ViewportFactory factory;
+  return &factory;
+}
