@@ -5,6 +5,11 @@ vec2 p = 2. * gl_FragCoord.xy / uv2_resolution - vec2(1.);
 
 float hash(float v) { return fract(sin(v*.1)*35827.3218); }
 float hash(vec2 v) { return hash(dot(v,vec2(71.,313.))); }
+float noise(float v) {
+	float F=floor(v), f=fract(v);
+	f *= f * (3. - 2. * f);
+	return mix(hash(F), hash(F+1.), f);
+}
 float noise(vec2 v) {
 	vec2 F=floor(v), f=fract(v);
 	f *= f * (3. - 2. * f);
@@ -28,7 +33,7 @@ float world(vec3 at) {
 void main() {
 	p.x *= uv2_resolution.x / uv2_resolution.y;
 	p *= 7.;
-	float a = 3.1416 * (fnoise(p) + sin(t));
+	float a = 3.1416 * (fnoise(p) + 4.*noise(t));
 	p += .6 * vec2(cos(a), sin(a));
 	gl_FragColor = vec4(fnoise(p));
 }
