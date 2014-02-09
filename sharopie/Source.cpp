@@ -32,7 +32,10 @@ kapusha::render::Shader *FileSource::new_shader() {
       kapusha::render::shader_t::type_e::fragment);
   if (*shader)
     return shader;
-  
+
+  kapusha::core::String::shared msg(shader->info_log());
+  L("compilation error: %s", msg->str());
+
   delete shader;
   return nullptr;
 }
