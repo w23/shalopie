@@ -6,9 +6,8 @@ const char *Viewport::s_vertex_shader_ =
     "gl_Position = av4_vertex;\n"
   "}";
 
-Viewport::Viewport(IViewportController *controller)
-: controller_(controller) {
-  socket_.bind(Socket::Address(5470));
+Viewport::Viewport(IViewportController *controller, ISource *source)
+  : controller_(controller), source_(source) {
 
   static const char* shader_fragment =
     "uniform vec2 uv2_resolution;\n"
@@ -45,15 +44,10 @@ void Viewport::resize(vec2i size) {
 }
 
 void Viewport::draw(int ms, float dt) {
-  char buffer[65536];
-  Socket::Address remote;
-  u32 recv = socket_.recv_from(remote, buffer, sizeof(buffer) - 1);
-  if (recv) {
-    buffer[recv] = 0;
-
+  render::Shader *new_shader = source_->new_shader();
+  if (new_shader) {
     render::shader_t sh_vertex(s_vertex_shader_, render::shader_t::type_e::vertex);
-    render::shader_t sh_fragment(buffer, render::shader_t::type_e::fragment);
-    render::Program *prog = new render::Program(sh_vertex, sh_fragment);
+    render::Program *prog = new render::Program(sh_vertex, *new_shader);
     if (*prog) {
       fullscreen_->set_material(new render::Material(prog));
       fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_));
