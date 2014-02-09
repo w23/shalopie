@@ -1,3 +1,4 @@
+#include <kapusha/math/rand_lcg.h>
 #include "Viewport.h"
 
 const char *Viewport::s_vertex_shader_ =
@@ -35,6 +36,14 @@ Viewport::Viewport(IViewportController *controller, ISource *source)
   fullscreen_->set_material(new render::Material(prog));
   fullscreen_->set_attrib_source("av4_vertex", buf_rect, 2);
   fullscreen_->set_geometry(render::Batch::Geometry::TriangleStrip, 0, 4);
+
+  core::Surface *surf = new core::Surface(
+    core::Surface::Meta(vec2i(256,256), core::Surface::Meta::RGBA8888));
+  rand_lcg32_t rand(17);
+  for (int i = 0; i < surf->meta().size.x * surf->meta().size.y; ++i)
+    surf->pixels<u32>()[i] = rand.get();
+  sampler_noise_ = new render::Sampler(surf);
+  delete surf;
 }
 
 void Viewport::resize(vec2i size) {
@@ -55,6 +64,7 @@ void Viewport::draw(int ms, float dt) {
   }
 
   fullscreen_->material()->set_uniform("uf_time", ms / 1000.f);
+  fullscreen_->material()->set_uniform("us2_noise", sampler_noise_);
   fullscreen_->draw();
 }
 

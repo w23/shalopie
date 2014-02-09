@@ -17,6 +17,7 @@ private:
   ISource *source_;
   render::Batch::shared fullscreen_;
   vec2i size_;
+  render::Sampler::shared sampler_noise_;
   
   static const char *s_vertex_shader_;
 };
