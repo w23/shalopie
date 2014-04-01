@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E11F568A17F6EE8100BF93FB /* libkapusha_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E11F568917F6EBFC00BF93FB /* libkapusha_main.a */; };
+		E1514D9518E697C300416311 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1514D9318E697C300416311 /* Source.cpp */; };
+		E1514DA218E69A0500416311 /* FileMonitor_poll_posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1514DA018E69A0500416311 /* FileMonitor_poll_posix.cpp */; };
 		E1C64A7B17873A270027CA3C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64A7A17873A270027CA3C /* Cocoa.framework */; };
 		E1C64A8517873A270027CA3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C64A8317873A270027CA3C /* InfoPlist.strings */; };
 		E1C64AAC17873CD30027CA3C /* libkapusha.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64AA717873C920027CA3C /* libkapusha.a */; };
@@ -23,6 +25,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = E10A64B317BE888C004B68C4;
 			remoteInfo = "kapusha-osx-main";
+		};
+		E1514D9E18E697C300416311 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1C5824518892DB2000EF6D2;
+			remoteInfo = "osx-test-visuals";
 		};
 		E1C64AA017873C920027CA3C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -59,13 +68,6 @@
 			remoteGlobalIDString = E189E890169AB3F300541FE1;
 			remoteInfo = "kapusha-core-osx";
 		};
-		E1C64AAA17873C920027CA3C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E197CBF216B3AD88003FDEF6;
-			remoteInfo = "kapusha-glut";
-		};
 		E1F5899217FB333400548AB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */;
@@ -76,6 +78,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1514D9218E697C300416311 /* ISource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISource.h; path = sharopie/ISource.h; sourceTree = SOURCE_ROOT; };
+		E1514D9318E697C300416311 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = sharopie/Source.cpp; sourceTree = SOURCE_ROOT; };
+		E1514D9418E697C300416311 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = sharopie/Source.h; sourceTree = SOURCE_ROOT; };
+		E1514DA018E69A0500416311 /* FileMonitor_poll_posix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileMonitor_poll_posix.cpp; path = sharopie/FileMonitor_poll_posix.cpp; sourceTree = SOURCE_ROOT; };
+		E1514DA118E69A0500416311 /* FileMonitor_poll_posix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileMonitor_poll_posix.h; path = sharopie/FileMonitor_poll_posix.h; sourceTree = SOURCE_ROOT; };
+		E1514DA418E7D3CE00416311 /* FileMonitor_kqueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileMonitor_kqueue.cpp; path = sharopie/FileMonitor_kqueue.cpp; sourceTree = SOURCE_ROOT; };
+		E1514DA518E7D3CE00416311 /* FileMonitor_kqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileMonitor_kqueue.h; path = sharopie/FileMonitor_kqueue.h; sourceTree = SOURCE_ROOT; };
 		E1C64A7717873A270027CA3C /* Sharopie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharopie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C64A7A17873A270027CA3C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E1C64A7D17873A270027CA3C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -169,10 +178,10 @@
 				E1C64AA317873C920027CA3C /* samples-ios.app */,
 				E1C64AA717873C920027CA3C /* libkapusha.a */,
 				E1C64AA917873C920027CA3C /* libkapushacore.a */,
-				E1C64AAB17873C920027CA3C /* libkapusha-glut.a */,
 				E11F568917F6EBFC00BF93FB /* libkapusha_main.a */,
 				E1C64AA517873C920027CA3C /* demo-dust.app */,
-				E1F5899317FB333400548AB8 /* osx-demo-terrain.app */,
+				E1F5899317FB333400548AB8 /* demo-terrain.app */,
+				E1514D9F18E697C300416311 /* osx-test-visuals.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,9 +189,16 @@
 		E1C64AAD17873F000027CA3C /* shalopie */ = {
 			isa = PBXGroup;
 			children = (
+				E1514D9218E697C300416311 /* ISource.h */,
+				E1514D9318E697C300416311 /* Source.cpp */,
+				E1514D9418E697C300416311 /* Source.h */,
 				E1F5899417FB338F00548AB8 /* Viewport.cpp */,
 				E1F5899517FB338F00548AB8 /* Viewport.h */,
 				E1F5899717FB33CD00548AB8 /* App.cpp */,
+				E1514DA018E69A0500416311 /* FileMonitor_poll_posix.cpp */,
+				E1514DA118E69A0500416311 /* FileMonitor_poll_posix.h */,
+				E1514DA418E7D3CE00416311 /* FileMonitor_kqueue.cpp */,
+				E1514DA518E7D3CE00416311 /* FileMonitor_kqueue.h */,
 			);
 			name = shalopie;
 			path = src/viewport;
@@ -249,6 +265,13 @@
 			remoteRef = E11F568817F6EBFC00BF93FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E1514D9F18E697C300416311 /* osx-test-visuals.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "osx-test-visuals.app";
+			remoteRef = E1514D9E18E697C300416311 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E1C64AA117873C920027CA3C /* libkapusha.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -284,17 +307,10 @@
 			remoteRef = E1C64AA817873C920027CA3C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E1C64AAB17873C920027CA3C /* libkapusha-glut.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libkapusha-glut.a";
-			remoteRef = E1C64AAA17873C920027CA3C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E1F5899317FB333400548AB8 /* osx-demo-terrain.app */ = {
+		E1F5899317FB333400548AB8 /* demo-terrain.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			path = "osx-demo-terrain.app";
+			path = "demo-terrain.app";
 			remoteRef = E1F5899217FB333400548AB8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -317,7 +333,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1F5899617FB338F00548AB8 /* Viewport.cpp in Sources */,
+				E1514D9518E697C300416311 /* Source.cpp in Sources */,
 				E1F5899817FB33CD00548AB8 /* App.cpp in Sources */,
+				E1514DA218E69A0500416311 /* FileMonitor_poll_posix.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
