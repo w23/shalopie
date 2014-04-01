@@ -7,6 +7,22 @@ const char *Viewport::s_vertex_shader_ =
     "gl_Position = av4_vertex;\n"
   "}";
 
+static const char *blit_vshader =
+"attribute vec4 av4_vertex;\n"
+"varying vec2 uv2_tex;\n"
+"void main(){\n"
+"gl_Position = av4_vertex;\n"
+"uv2_tex = av4_vertex.xy * .5 + .5;\n"
+"}";
+
+static const char *blit_fshader =
+"uniform sampler2D us2_frame;\n"
+"varying vec2 uv2_tex;\n"
+"void main(){\n"
+"gl_FragColor = texture2D(us2_frame, uv2_tex);\n"
+"}";
+
+
 Viewport::Viewport(IViewportController *controller, ISource *source)
   : controller_(controller), source_(source) {
 
@@ -37,6 +53,22 @@ Viewport::Viewport(IViewportController *controller, ISource *source)
   fullscreen_->set_attrib_source("av4_vertex", buf_rect, 2);
   fullscreen_->set_geometry(render::Batch::Geometry::TriangleStrip, 0, 4);
 
+  {
+    framebuffer_ = new render::Framebuffer();
+    frame_ = new render::Sampler();
+
+    render::shader_t blitv(blit_vshader, render::shader_t::type_e::vertex);
+    if (!blitv) L("err: %s", blitv.info_log()->str());
+    render::shader_t blitf(blit_fshader, render::shader_t::type_e::fragment);
+    if (!blitf) L("err: %s", blitf.info_log()->str());
+    blit_ = new render::Batch();
+    blit_->set_material(new render::Material(new render::Program(blitv, blitf)));
+    blit_->set_attrib_source("av4_vertex", buf_rect, 2);
+    blit_->set_geometry(render::Batch::Geometry::TriangleStrip, 0, 4);
+    blit_->material()->set_uniform("us2_frame", frame_);
+    
+  }
+    
   core::Surface *surf = new core::Surface(
     core::Surface::Meta(vec2i(256,256), core::Surface::Meta::RGBA8888));
   rand_lcg32_t rand(17);
@@ -50,21 +82,30 @@ void Viewport::resize(vec2i size) {
   size_ = size;
   glViewport(0, 0, size_.x, size_.y);
   fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_));
+  
+  frame_->upload(core::Surface::Meta(vec2i(size.x/2, size.y/2), core::Surface::Meta::Format::RGBA8888), nullptr);
+  framebuffer_->attach_color(frame_, 0);
 }
 
 void Viewport::draw(int ms, float dt) {
   render::Shader *new_shader = source_->new_shader();
   if (new_shader) {
+    L("applying new shader");
     render::shader_t sh_vertex(s_vertex_shader_, render::shader_t::type_e::vertex);
     render::Program *prog = new render::Program(sh_vertex, *new_shader);
     if (*prog) {
       fullscreen_->set_material(new render::Material(prog));
-      fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_));
     }
   }
 
   fullscreen_->material()->set_uniform("uf_time", ms / 1000.f);
   fullscreen_->material()->set_uniform("us2_noise", sampler_noise_);
+  fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_)*.5f);
+
+  framebuffer_->bind();
   fullscreen_->draw();
+
+  render::Context::bind_framebuffer(nullptr);
+  blit_->draw();
 }
 

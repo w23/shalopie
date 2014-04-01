@@ -1,6 +1,7 @@
 #include <kapusha/viewport.h>
 #include <kapusha/io/Socket.h>
 #include <kapusha/render/Batch.h>
+#include <kapusha/render/Framebuffer.h>
 #include "ISource.h"
 
 using namespace kapusha;
@@ -18,6 +19,10 @@ private:
   render::Batch::shared fullscreen_;
   vec2i size_;
   render::Sampler::shared sampler_noise_;
+  
+  render::Sampler::shared frame_;
+  render::Framebuffer::shared framebuffer_;
+  render::Batch::shared blit_;
   
   static const char *s_vertex_shader_;
 };
