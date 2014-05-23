@@ -10,6 +10,9 @@
 		E11F568A17F6EE8100BF93FB /* libkapusha_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E11F568917F6EBFC00BF93FB /* libkapusha_main.a */; };
 		E1514D9518E697C300416311 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1514D9318E697C300416311 /* Source.cpp */; };
 		E1514DA218E69A0500416311 /* FileMonitor_poll_posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1514DA018E69A0500416311 /* FileMonitor_poll_posix.cpp */; };
+		E18424B2192F9AB3000FFDA6 /* shmach.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B1192F9AB3000FFDA6 /* shmach.c */; };
+		E18424C1192FED67000FFDA6 /* shmach.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B1192F9AB3000FFDA6 /* shmach.c */; };
+		E18424C2192FED67000FFDA6 /* shmach_test.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B3192FEBE5000FFDA6 /* shmach_test.c */; };
 		E1C64A7B17873A270027CA3C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64A7A17873A270027CA3C /* Cocoa.framework */; };
 		E1C64A8517873A270027CA3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C64A8317873A270027CA3C /* InfoPlist.strings */; };
 		E1C64AAC17873CD30027CA3C /* libkapusha.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64AA717873C920027CA3C /* libkapusha.a */; };
@@ -77,6 +80,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E18424B6192FED50000FFDA6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E1514D9218E697C300416311 /* ISource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISource.h; path = sharopie/ISource.h; sourceTree = SOURCE_ROOT; };
 		E1514D9318E697C300416311 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = sharopie/Source.cpp; sourceTree = SOURCE_ROOT; };
@@ -85,6 +100,10 @@
 		E1514DA118E69A0500416311 /* FileMonitor_poll_posix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileMonitor_poll_posix.h; path = sharopie/FileMonitor_poll_posix.h; sourceTree = SOURCE_ROOT; };
 		E1514DA418E7D3CE00416311 /* FileMonitor_kqueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileMonitor_kqueue.cpp; path = sharopie/FileMonitor_kqueue.cpp; sourceTree = SOURCE_ROOT; };
 		E1514DA518E7D3CE00416311 /* FileMonitor_kqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileMonitor_kqueue.h; path = sharopie/FileMonitor_kqueue.h; sourceTree = SOURCE_ROOT; };
+		E18424B0192F9990000FFDA6 /* shmach.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shmach.h; sourceTree = "<group>"; };
+		E18424B1192F9AB3000FFDA6 /* shmach.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shmach.c; sourceTree = "<group>"; };
+		E18424B3192FEBE5000FFDA6 /* shmach_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shmach_test.c; sourceTree = "<group>"; };
+		E18424B8192FED50000FFDA6 /* shmach_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = shmach_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C64A7717873A270027CA3C /* Sharopie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharopie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C64A7A17873A270027CA3C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E1C64A7D17873A270027CA3C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -100,6 +119,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E18424B5192FED50000FFDA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E1C64A7417873A270027CA3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -114,12 +140,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E18424A7192F9967000FFDA6 /* shmach */ = {
+			isa = PBXGroup;
+			children = (
+				E18424B0192F9990000FFDA6 /* shmach.h */,
+				E18424B1192F9AB3000FFDA6 /* shmach.c */,
+				E18424B3192FEBE5000FFDA6 /* shmach_test.c */,
+			);
+			path = shmach;
+			sourceTree = "<group>";
+		};
 		E1C64A6E17873A270027CA3C = {
 			isa = PBXGroup;
 			children = (
 				E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */,
 				E1C64AAD17873F000027CA3C /* shalopie */,
 				E1C64A8017873A270027CA3C /* sharopie-osx */,
+				E18424A7192F9967000FFDA6 /* shmach */,
 				E1C64A7917873A270027CA3C /* Frameworks */,
 				E1C64A7817873A270027CA3C /* Products */,
 			);
@@ -129,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				E1C64A7717873A270027CA3C /* Sharopie.app */,
+				E18424B8192FED50000FFDA6 /* shmach_test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +245,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E18424B7192FED50000FFDA6 /* shmach_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E18424BE192FED50000FFDA6 /* Build configuration list for PBXNativeTarget "shmach_test" */;
+			buildPhases = (
+				E18424B4192FED50000FFDA6 /* Sources */,
+				E18424B5192FED50000FFDA6 /* Frameworks */,
+				E18424B6192FED50000FFDA6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shmach_test;
+			productName = shmach_test;
+			productReference = E18424B8192FED50000FFDA6 /* shmach_test */;
+			productType = "com.apple.product-type.tool";
+		};
 		E1C64A7617873A270027CA3C /* Sharopie */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1C64A9417873A270027CA3C /* Build configuration list for PBXNativeTarget "Sharopie" */;
@@ -253,6 +308,7 @@
 			projectRoot = "";
 			targets = (
 				E1C64A7617873A270027CA3C /* Sharopie */,
+				E18424B7192FED50000FFDA6 /* shmach_test */,
 			);
 		};
 /* End PBXProject section */
@@ -328,11 +384,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E18424B4192FED50000FFDA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E18424C1192FED67000FFDA6 /* shmach.c in Sources */,
+				E18424C2192FED67000FFDA6 /* shmach_test.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E1C64A7317873A270027CA3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E1F5899617FB338F00548AB8 /* Viewport.cpp in Sources */,
+				E18424B2192F9AB3000FFDA6 /* shmach.c in Sources */,
 				E1514D9518E697C300416311 /* Source.cpp in Sources */,
 				E1F5899817FB33CD00548AB8 /* App.cpp in Sources */,
 				E1514DA218E69A0500416311 /* FileMonitor_poll_posix.cpp in Sources */,
@@ -353,6 +419,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E18424BF192FED50000FFDA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E18424C0192FED50000FFDA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		E1C64A9217873A270027CA3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -441,6 +544,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E18424BE192FED50000FFDA6 /* Build configuration list for PBXNativeTarget "shmach_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E18424BF192FED50000FFDA6 /* Debug */,
+				E18424C0192FED50000FFDA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E1C64A7217873A270027CA3C /* Build configuration list for PBXProject "sharopie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
