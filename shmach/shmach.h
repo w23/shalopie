@@ -37,10 +37,11 @@ typedef struct {
   
 typedef uint8_t shmach_op_t;
 
-typedef struct {
+/*typedef struct {
   shmach_op_t *text;
   uint32_t size;
-} shmach_section_t;
+} shmach_section_t;*/
+typedef const shmach_op_t* shmach_section_t;
 
 typedef struct {
   enum {
@@ -53,7 +54,7 @@ typedef struct {
 } shmach_core_return_t;
 
 struct shmach_core_t_ {
-  shmach_op_t *text;
+  const shmach_op_t *text;
   shmach_value_t stack[SHMACH_MAX_STACK];
   shmach_value_t *sp;
   uint32_t pc;
@@ -91,15 +92,20 @@ enum {
   SHMACH_OP_OCALL,
 
 // integer
-  SHMACH_OP_LOAD_0,
-  SHMACH_OP_LOAD_1,
-  SHMACH_OP_ADD,
-  SHMACH_OP_SUB,
-  SHMACH_OP_CMP_EQ,
-  SHMACH_OP_CMP_GT,
+  SHMACH_OP_LOAD,
+  SHMACH_OP_LOAD0,
+  SHMACH_OP_ILOAD1,
+  SHMACH_OP_IADD,
+  SHMACH_OP_ISUB,
+  SHMACH_OP_ICMP_EQ,
+  SHMACH_OP_ICMP_GT,
   
 // float
-  SHMACH_OP_FLOAD_1
+  SHMACH_OP_FLOAD1,
+  SHMACH_OP_FADD,
+  SHMACH_OP_FSIN,
+  SHMACH_OP_FPHASE,
+  SHMACH_OP_FPH2RAD
   
 // vec4f
 };

@@ -13,10 +13,30 @@
 		E18424B2192F9AB3000FFDA6 /* shmach.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B1192F9AB3000FFDA6 /* shmach.c */; };
 		E18424C1192FED67000FFDA6 /* shmach.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B1192F9AB3000FFDA6 /* shmach.c */; };
 		E18424C2192FED67000FFDA6 /* shmach_test.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B3192FEBE5000FFDA6 /* shmach_test.c */; };
+		E18424C51930869D000FFDA6 /* shmurth.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424C41930869D000FFDA6 /* shmurth.c */; };
 		E1C64A7B17873A270027CA3C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64A7A17873A270027CA3C /* Cocoa.framework */; };
 		E1C64A8517873A270027CA3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C64A8317873A270027CA3C /* InfoPlist.strings */; };
 		E1C64AAC17873CD30027CA3C /* libkapusha.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64AA717873C920027CA3C /* libkapusha.a */; };
 		E1C64AB717896D290027CA3C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C64AB617896D290027CA3C /* OpenGL.framework */; };
+		E1DB71DA1930B1F600EA00DD /* shmach.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424B1192F9AB3000FFDA6 /* shmach.c */; };
+		E1DB71E31930B21F00EA00DD /* shmurth_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB71E21930B21F00EA00DD /* shmurth_test.cpp */; };
+		E1DB71E41930B37700EA00DD /* shmurth.c in Sources */ = {isa = PBXBuildFile; fileRef = E18424C41930869D000FFDA6 /* shmurth.c */; };
+		E1DB71E71930BC4A00EA00DD /* Ashembler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB71E51930BC4A00EA00DD /* Ashembler.cpp */; };
+		E1DB71E81930BC4A00EA00DD /* Ashembler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB71E51930BC4A00EA00DD /* Ashembler.cpp */; };
+		E1DB71E91930BC4A00EA00DD /* Ashembler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB71E51930BC4A00EA00DD /* Ashembler.cpp */; };
+		E1DB71EB1930DFE800EA00DD /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71EA1930DFE800EA00DD /* AudioUnit.framework */; };
+		E1DB71ED1930DFF600EA00DD /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71EC1930DFF600EA00DD /* CoreAudio.framework */; };
+		E1DB71EF1930DFFD00EA00DD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71EE1930DFFD00EA00DD /* AudioToolbox.framework */; };
+		E1DB71F11930E00500EA00DD /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71F01930E00500EA00DD /* CoreMIDI.framework */; };
+		E1DB71F31930E00E00EA00DD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71F21930E00E00EA00DD /* CoreFoundation.framework */; };
+		E1DB71F51930E05900EA00DD /* shmurth_test in Resources */ = {isa = PBXBuildFile; fileRef = E1DB71F41930E05900EA00DD /* shmurth_test */; };
+		E1DB71F81930EFFB00EA00DD /* Murth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB71F61930EFFB00EA00DD /* Murth.cpp */; };
+		E1DB71FB193109A200EA00DD /* Sound_CoreAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB71F9193109A200EA00DD /* Sound_CoreAudio.cpp */; };
+		E1DB71FC19310C1100EA00DD /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71EC1930DFF600EA00DD /* CoreAudio.framework */; };
+		E1DB71FD19310C1700EA00DD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71EE1930DFFD00EA00DD /* AudioToolbox.framework */; };
+		E1DB71FE19310C2200EA00DD /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71EA1930DFE800EA00DD /* AudioUnit.framework */; };
+		E1DB71FF19310C2B00EA00DD /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DB71F01930E00500EA00DD /* CoreMIDI.framework */; };
+		E1DB720219310E2F00EA00DD /* Midi_CoreMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DB720019310E2F00EA00DD /* Midi_CoreMidi.cpp */; };
 		E1F5899617FB338F00548AB8 /* Viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5899417FB338F00548AB8 /* Viewport.cpp */; };
 		E1F5899817FB33CD00548AB8 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5899717FB33CD00548AB8 /* App.cpp */; };
 /* End PBXBuildFile section */
@@ -90,6 +110,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		E1DB71DD1930B1F600EA00DD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +133,8 @@
 		E18424B1192F9AB3000FFDA6 /* shmach.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shmach.c; sourceTree = "<group>"; };
 		E18424B3192FEBE5000FFDA6 /* shmach_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shmach_test.c; sourceTree = "<group>"; };
 		E18424B8192FED50000FFDA6 /* shmach_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = shmach_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		E18424C3193081E2000FFDA6 /* shmurth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shmurth.h; path = sharopie/shmurth.h; sourceTree = SOURCE_ROOT; };
+		E18424C41930869D000FFDA6 /* shmurth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shmurth.c; path = sharopie/shmurth.c; sourceTree = SOURCE_ROOT; };
 		E1C64A7717873A270027CA3C /* Sharopie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharopie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C64A7A17873A270027CA3C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E1C64A7D17873A270027CA3C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -113,6 +144,22 @@
 		E1C64A8417873A270027CA3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C64A9717873C910027CA3C /* Kapusha.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kapusha.xcodeproj; path = 3p/kapusha/Kapusha.xcodeproj; sourceTree = "<group>"; };
 		E1C64AB617896D290027CA3C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E1DB71E11930B1F600EA00DD /* shmach_test copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "shmach_test copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1DB71E21930B21F00EA00DD /* shmurth_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shmurth_test.cpp; path = sharopie/shmurth_test.cpp; sourceTree = SOURCE_ROOT; };
+		E1DB71E51930BC4A00EA00DD /* Ashembler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ashembler.cpp; path = shmach/Ashembler.cpp; sourceTree = SOURCE_ROOT; };
+		E1DB71E61930BC4A00EA00DD /* Ashembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ashembler.h; path = shmach/Ashembler.h; sourceTree = SOURCE_ROOT; };
+		E1DB71EA1930DFE800EA00DD /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		E1DB71EC1930DFF600EA00DD /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		E1DB71EE1930DFFD00EA00DD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E1DB71F01930E00500EA00DD /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		E1DB71F21930E00E00EA00DD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		E1DB71F41930E05900EA00DD /* shmurth_test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shmurth_test; sourceTree = SOURCE_ROOT; };
+		E1DB71F61930EFFB00EA00DD /* Murth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Murth.cpp; path = sharopie/Murth.cpp; sourceTree = SOURCE_ROOT; };
+		E1DB71F71930EFFB00EA00DD /* Murth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Murth.h; path = sharopie/Murth.h; sourceTree = SOURCE_ROOT; };
+		E1DB71F9193109A200EA00DD /* Sound_CoreAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sound_CoreAudio.cpp; path = sharopie/Sound_CoreAudio.cpp; sourceTree = SOURCE_ROOT; };
+		E1DB71FA193109A200EA00DD /* Sound_CoreAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sound_CoreAudio.h; path = sharopie/Sound_CoreAudio.h; sourceTree = SOURCE_ROOT; };
+		E1DB720019310E2F00EA00DD /* Midi_CoreMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Midi_CoreMidi.cpp; sourceTree = SOURCE_ROOT; };
+		E1DB720119310E2F00EA00DD /* Midi_CoreMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Midi_CoreMidi.h; sourceTree = SOURCE_ROOT; };
 		E1F5899417FB338F00548AB8 /* Viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Viewport.cpp; path = sharopie/Viewport.cpp; sourceTree = SOURCE_ROOT; };
 		E1F5899517FB338F00548AB8 /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Viewport.h; path = sharopie/Viewport.h; sourceTree = SOURCE_ROOT; };
 		E1F5899717FB33CD00548AB8 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = App.cpp; path = sharopie/App.cpp; sourceTree = SOURCE_ROOT; };
@@ -130,10 +177,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DB71FF19310C2B00EA00DD /* CoreMIDI.framework in Frameworks */,
+				E1DB71FE19310C2200EA00DD /* AudioUnit.framework in Frameworks */,
+				E1DB71FD19310C1700EA00DD /* AudioToolbox.framework in Frameworks */,
+				E1DB71FC19310C1100EA00DD /* CoreAudio.framework in Frameworks */,
 				E11F568A17F6EE8100BF93FB /* libkapusha_main.a in Frameworks */,
 				E1C64AAC17873CD30027CA3C /* libkapusha.a in Frameworks */,
 				E1C64AB717896D290027CA3C /* OpenGL.framework in Frameworks */,
 				E1C64A7B17873A270027CA3C /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1DB71DC1930B1F600EA00DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1DB71F31930E00E00EA00DD /* CoreFoundation.framework in Frameworks */,
+				E1DB71F11930E00500EA00DD /* CoreMIDI.framework in Frameworks */,
+				E1DB71EF1930DFFD00EA00DD /* AudioToolbox.framework in Frameworks */,
+				E1DB71ED1930DFF600EA00DD /* CoreAudio.framework in Frameworks */,
+				E1DB71EB1930DFE800EA00DD /* AudioUnit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +206,8 @@
 		E18424A7192F9967000FFDA6 /* shmach */ = {
 			isa = PBXGroup;
 			children = (
+				E1DB71E51930BC4A00EA00DD /* Ashembler.cpp */,
+				E1DB71E61930BC4A00EA00DD /* Ashembler.h */,
 				E18424B0192F9990000FFDA6 /* shmach.h */,
 				E18424B1192F9AB3000FFDA6 /* shmach.c */,
 				E18424B3192FEBE5000FFDA6 /* shmach_test.c */,
@@ -167,6 +232,7 @@
 			children = (
 				E1C64A7717873A270027CA3C /* Sharopie.app */,
 				E18424B8192FED50000FFDA6 /* shmach_test */,
+				E1DB71E11930B1F600EA00DD /* shmach_test copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +240,11 @@
 		E1C64A7917873A270027CA3C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1DB71F21930E00E00EA00DD /* CoreFoundation.framework */,
+				E1DB71F01930E00500EA00DD /* CoreMIDI.framework */,
+				E1DB71EE1930DFFD00EA00DD /* AudioToolbox.framework */,
+				E1DB71EC1930DFF600EA00DD /* CoreAudio.framework */,
+				E1DB71EA1930DFE800EA00DD /* AudioUnit.framework */,
 				E1C64AB617896D290027CA3C /* OpenGL.framework */,
 				E1C64A7A17873A270027CA3C /* Cocoa.framework */,
 				E1C64A7C17873A270027CA3C /* Other Frameworks */,
@@ -237,6 +308,16 @@
 				E1514DA118E69A0500416311 /* FileMonitor_poll_posix.h */,
 				E1514DA418E7D3CE00416311 /* FileMonitor_kqueue.cpp */,
 				E1514DA518E7D3CE00416311 /* FileMonitor_kqueue.h */,
+				E18424C3193081E2000FFDA6 /* shmurth.h */,
+				E18424C41930869D000FFDA6 /* shmurth.c */,
+				E1DB71E21930B21F00EA00DD /* shmurth_test.cpp */,
+				E1DB71F41930E05900EA00DD /* shmurth_test */,
+				E1DB71F61930EFFB00EA00DD /* Murth.cpp */,
+				E1DB71F71930EFFB00EA00DD /* Murth.h */,
+				E1DB71F9193109A200EA00DD /* Sound_CoreAudio.cpp */,
+				E1DB71FA193109A200EA00DD /* Sound_CoreAudio.h */,
+				E1DB720019310E2F00EA00DD /* Midi_CoreMidi.cpp */,
+				E1DB720119310E2F00EA00DD /* Midi_CoreMidi.h */,
 			);
 			name = shalopie;
 			path = src/viewport;
@@ -279,6 +360,23 @@
 			productReference = E1C64A7717873A270027CA3C /* Sharopie.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E1DB71D81930B1F600EA00DD /* shmurth_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1DB71DE1930B1F600EA00DD /* Build configuration list for PBXNativeTarget "shmurth_test" */;
+			buildPhases = (
+				E1DB71D91930B1F600EA00DD /* Sources */,
+				E1DB71DC1930B1F600EA00DD /* Frameworks */,
+				E1DB71DD1930B1F600EA00DD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shmurth_test;
+			productName = shmach_test;
+			productReference = E1DB71E11930B1F600EA00DD /* shmach_test copy */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -286,7 +384,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SP;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Ivan Avdeev";
 			};
 			buildConfigurationList = E1C64A7217873A270027CA3C /* Build configuration list for PBXProject "sharopie" */;
@@ -309,6 +407,7 @@
 			targets = (
 				E1C64A7617873A270027CA3C /* Sharopie */,
 				E18424B7192FED50000FFDA6 /* shmach_test */,
+				E1DB71D81930B1F600EA00DD /* shmurth_test */,
 			);
 		};
 /* End PBXProject section */
@@ -377,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DB71F51930E05900EA00DD /* shmurth_test in Resources */,
 				E1C64A8517873A270027CA3C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E18424C1192FED67000FFDA6 /* shmach.c in Sources */,
+				E1DB71E81930BC4A00EA00DD /* Ashembler.cpp in Sources */,
 				E18424C2192FED67000FFDA6 /* shmach_test.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,11 +498,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DB720219310E2F00EA00DD /* Midi_CoreMidi.cpp in Sources */,
+				E1DB71FB193109A200EA00DD /* Sound_CoreAudio.cpp in Sources */,
+				E1DB71E71930BC4A00EA00DD /* Ashembler.cpp in Sources */,
 				E1F5899617FB338F00548AB8 /* Viewport.cpp in Sources */,
+				E1DB71F81930EFFB00EA00DD /* Murth.cpp in Sources */,
+				E18424C51930869D000FFDA6 /* shmurth.c in Sources */,
 				E18424B2192F9AB3000FFDA6 /* shmach.c in Sources */,
 				E1514D9518E697C300416311 /* Source.cpp in Sources */,
 				E1F5899817FB33CD00548AB8 /* App.cpp in Sources */,
 				E1514DA218E69A0500416311 /* FileMonitor_poll_posix.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1DB71D91930B1F600EA00DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1DB71DA1930B1F600EA00DD /* shmach.c in Sources */,
+				E1DB71E91930BC4A00EA00DD /* Ashembler.cpp in Sources */,
+				E1DB71E41930B37700EA00DD /* shmurth.c in Sources */,
+				E1DB71E31930B21F00EA00DD /* shmurth_test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +577,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -493,7 +609,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -541,6 +656,43 @@
 			};
 			name = Release;
 		};
+		E1DB71DF1930B1F600EA00DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "shmach_test copy";
+			};
+			name = Debug;
+		};
+		E1DB71E01930B1F600EA00DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "shmach_test copy";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -551,6 +703,7 @@
 				E18424C0192FED50000FFDA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1C64A7217873A270027CA3C /* Build configuration list for PBXProject "sharopie" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +719,15 @@
 			buildConfigurations = (
 				E1C64A9517873A270027CA3C /* Debug */,
 				E1C64A9617873A270027CA3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1DB71DE1930B1F600EA00DD /* Build configuration list for PBXNativeTarget "shmurth_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1DB71DF1930B1F600EA00DD /* Debug */,
+				E1DB71E01930B1F600EA00DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

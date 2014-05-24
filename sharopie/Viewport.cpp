@@ -1,5 +1,6 @@
 #include <kapusha/math/rand_lcg.h>
 #include "Viewport.h"
+#include "Ashembler.h"
 
 const char *Viewport::s_vertex_shader_ =
   "attribute vec4 av4_vertex;\n"
@@ -7,6 +8,7 @@ const char *Viewport::s_vertex_shader_ =
     "gl_Position = av4_vertex;\n"
   "}";
 
+/*
 static const char *blit_vshader =
 "attribute vec4 av4_vertex;\n"
 "varying vec2 uv2_tex;\n"
@@ -20,12 +22,32 @@ static const char *blit_fshader =
 "varying vec2 uv2_tex;\n"
 "void main(){\n"
 "gl_FragColor = texture2D(us2_frame, uv2_tex);\n"
-"}";
+"}";*/
 
+static void viewport_func(struct shmach_object_t_ *obj, struct shmach_core_t_ *core, uint32_t index)
+{
+}
+
+Viewport::viewport_proxy_t::viewport_proxy_t(Viewport *master)
+  : master_(master)
+{
+  o_.dtor = nullptr;
+  o_.func = viewport_func;
+  o_.ref = 0;
+}
+
+void Viewport::synth_callback(void *param, float *stream, uint32_t frames) {
+  Murth *m = static_cast<Murth*>(param);
+  m->synthesize(stream, frames);
+}
 
 Viewport::Viewport(IViewportController *controller, ISource *source)
-  : controller_(controller), source_(source) {
+  : controller_(controller)
+  , viewport_proxy_(this) // \fixme incorrect! 'this' is not ready yet!
+  , sound_(synth_callback, &murth_)
+{
 
+/*
   static const char* shader_fragment =
     "uniform vec2 uv2_resolution;\n"
     "uniform float uf_time;\n"
@@ -49,6 +71,7 @@ Viewport::Viewport(IViewportController *controller, ISource *source)
   render::Program *prog = new render::Program(sh_vertex, sh_fragment);
 
   fullscreen_ = new render::Batch();
+  render::Ba
   fullscreen_->set_material(new render::Material(prog));
   fullscreen_->set_attrib_source("av4_vertex", buf_rect, 2);
   fullscreen_->set_geometry(render::Batch::Geometry::TriangleStrip, 0, 4);
@@ -76,36 +99,52 @@ Viewport::Viewport(IViewportController *controller, ISource *source)
     surf->pixels<u32>()[i] = rand.get();
   sampler_noise_ = new render::Sampler(surf);
   delete surf;
+  */
+  
+  static const char *sadness =
+" .mixer "
+" load0 "
+" loop: "
+" 0.02 fadd "
+" fphase "
+" dup fph2rad fsin dup "
+" 2 yield "
+" :loop jmp ";
+
+  shmach::Ashembler ashm;
+  
+  auto prog = ashm.parse(sadness, static_cast<uint32_t>(strlen(sadness)));
+  
+  auto section = prog.sections.begin();
+  if (section == prog.sections.end()) {
+    printf("ERROR: %s\n", prog.error_desc.c_str());
+    exit(-1);
+  }
+
+  murth_.queue_mixer_reprogram(section->second.data(),
+    static_cast<uint32_t>(section->second.size()));
+  
+  midi_.start();
+  sound_.start();
 }
 
 void Viewport::resize(vec2i size) {
   size_ = size;
   glViewport(0, 0, size_.x, size_.y);
-  fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_));
-  
-  frame_->upload(core::Surface::Meta(vec2i(size.x/2, size.y/2), core::Surface::Meta::Format::RGBA8888), nullptr);
-  framebuffer_->attach_color(frame_, 0);
 }
 
 void Viewport::draw(int ms, float dt) {
-  render::Shader *new_shader = source_->new_shader();
-  if (new_shader) {
-    L("applying new shader");
-    render::shader_t sh_vertex(s_vertex_shader_, render::shader_t::type_e::vertex);
-    render::Program *prog = new render::Program(sh_vertex, *new_shader);
-    if (*prog) {
-      fullscreen_->set_material(new render::Material(prog));
-    }
+/*
+  shmach_core_return_t ret = shmach_core_run(&core_, 128);
+  switch(ret.result) {
+  case shmach_core_return_t::shmach_core_return_result_hang:
+    L("core hang");
+  case shmach_core_return_t::shmach_core_return_result_return:
+    L("quit");
+    controller_->quit();
+    break;
+  default: break;
   }
-
-  fullscreen_->material()->set_uniform("uf_time", ms / 1000.f);
-  fullscreen_->material()->set_uniform("us2_noise", sampler_noise_);
-  fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_)*.5f);
-
-  framebuffer_->bind();
-  fullscreen_->draw();
-
-  render::Context::bind_framebuffer(nullptr);
-  blit_->draw();
+  */
 }
 
