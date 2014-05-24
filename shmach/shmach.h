@@ -14,12 +14,13 @@ enum {
 struct shmach_core_t_;
 struct shmach_object_t_;
 
-typedef void (*shmach_object_method_f)(struct shmach_object_t_ *obj, struct shmach_core_t_ *core);
+// \return stack items to pop
+typedef uint32_t (*shmach_object_method_f)(struct shmach_object_t_ *obj, struct shmach_core_t_ *core);
 
 struct shmach_object_t_ {
   uint32_t ref;
   void (*dtor)(struct shmach_object_t_ *obj);
-  shmach_object_method_f *functbl;
+  void (*func)(struct shmach_object_t_ *obj, struct shmach_core_t_ *core, uint32_t index);
 };
 typedef struct shmach_object_t_ shmach_object_t;
 
@@ -35,6 +36,11 @@ typedef struct {
 } shmach_value_t;
   
 typedef uint8_t shmach_op_t;
+
+typedef struct {
+  shmach_op_t *text;
+  uint32_t size;
+} shmach_section_t;
 
 typedef struct {
   enum {
@@ -58,6 +64,7 @@ shmach_value_t *shmach_core_init(
   shmach_core_t *core,
   shmach_op_t *text,
   uint32_t arguments);
+shmach_value_t *shmach_core_reset(shmach_core_t *core, uint32_t argc);
 shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles);
 
 enum {
@@ -73,6 +80,10 @@ enum {
   SHMACH_OP_DUP,
   SHMACH_OP_SWAP,
   SHMACH_OP_POP,
+  // GET (N .<-. v, PUT (N v .->. v)
+  // DUPN (N {.N.})
+  // SWAPN (N {.N.<->.N.}
+  // ROTN ?
   
 // object
   SHMACH_OP_ORETAIN,

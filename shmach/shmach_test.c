@@ -61,53 +61,45 @@ static int test_basic_data_manip() {
 }
 
 
-static int f1called, f2called;;
-static void test_object_call_fn1(shmach_object_t *obj, shmach_core_t *core) {
-  f1called = 1;
-  core->sp += 3;
-}
-static void test_object_call_fn2(shmach_object_t *obj, shmach_core_t *core) {
-  f2called = core->sp[2].v.i;
-  core->sp += 3;
+static int test_object_call_val;
+static void test_object_call_func(shmach_object_t *obj, shmach_core_t *core, uint32_t index)
+{
+  if (index == 1)
+    test_object_call_val = core->sp[0].v.i;
+  core->sp += 1;
 }
 
 static int test_object_call() {
   static shmach_op_t text[] = {
     SHMACH_OP_DUP,    // o o
     SHMACH_OP_LOAD_1, // 1 o o
-    SHMACH_OP_DUP,
-    SHMACH_OP_ADD,
-    SHMACH_OP_SWAP,   // o 1 o
-    SHMACH_OP_LOAD_1, // 1 o 1 o
-    SHMACH_OP_SWAP,   // o 1 1 o
+    SHMACH_OP_DUP,    // 1 1 o o
+    SHMACH_OP_ADD,    // 2 o o
+    SHMACH_OP_SWAP,   // o 2 o
+    SHMACH_OP_LOAD_1, // 1 o 2 o
+    SHMACH_OP_SWAP,   // o 1 2 o
     SHMACH_OP_OCALL,  // o
     SHMACH_OP_POP,
     SHMACH_OP_LOAD_0,
     SHMACH_OP_RET
   };
-  f1called = 0;
-  f2called = 0;
+  test_object_call_val = 0;
   shmach_core_t core;
   shmach_object_t tmp;
-  shmach_object_method_f ftbl[2] = {
-    test_object_call_fn1, test_object_call_fn2
-  };
-  tmp.functbl = ftbl;
+  tmp.func = test_object_call_func;
   shmach_value_t *val = shmach_core_init(&core, text, 1);
   val[0].v.o = &tmp;
   shmach_core_return_t ret = shmach_core_run(&core, 128);
   if (ret.result != shmach_core_return_result_return) return 1;
   if (ret.count != 0) return 2;
-  if (f1called != 0) return 3;
-  if (f2called != 2) return 4;
+  if (test_object_call_val != 2) return 3;
   return 0;
-
 }
 
 // \todo:
 // - jmp
 // - flow ctl
-// - obects
+// - objects
 
 int main(int argc, char *argv[]) {
   int ret = 0;

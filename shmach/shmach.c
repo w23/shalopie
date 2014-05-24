@@ -14,7 +14,7 @@ void shmach_object_retain(shmach_object_t *obj) {
 }
 
 void shmach_object_release(shmach_object_t *obj) {
-  if (ATOMIC32_DEC_AND_FETCH(obj->ref) == 0)
+  if (ATOMIC32_DEC_AND_FETCH(obj->ref) == 0 && obj->dtor != NULL)
     obj->dtor(obj);
 }
 
@@ -42,6 +42,9 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
           ret.result = shmach_core_return_result_return;
           ret.count = args;
           ret.values = core->sp + 1;
+          // core reset
+          core->pc = 0;
+          core->sp = core->stack + SHMACH_MAX_STACK - args;
           return ret;
         }
         core->pc = core->sp[args].v.i;
@@ -87,9 +90,12 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
     case SHMACH_OP_ORELEASE:
       shmach_object_release((core->sp++)->v.o);
       break;
-    case SHMACH_OP_OCALL: // expects [OBJ FNUM Fargs...]
-      // func should clear all parameters
-      core->sp[0].v.o->functbl[core->sp[1].v.i](core->sp[0].v.o, core);
+    case SHMACH_OP_OCALL: {// expects [OBJ FNUM Fargs...]
+        shmach_object_t *obj = core->sp[0].v.o;
+        uint32_t findex = core->sp[1].v.i;
+        core->sp += 2;
+        obj->func(obj, core, findex);
+      }
       break;
 
     case SHMACH_OP_LOAD_0:
