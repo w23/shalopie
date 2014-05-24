@@ -1,6 +1,7 @@
 #include <kapusha/math/rand_lcg.h>
+#include <kapusha/io/IFile.h>
+#include <kapusha/io/IFilesystem.h>
 #include "Viewport.h"
-#include "Ashembler.h"
 
 const char *Viewport::s_vertex_shader_ =
   "attribute vec4 av4_vertex;\n"
@@ -41,10 +42,16 @@ void Viewport::synth_callback(void *param, float *stream, uint32_t frames) {
   m->synthesize(stream, frames);
 }
 
+void Viewport::midi_callback(void *param, const void *data, uint32_t size) {
+  Murth *m = static_cast<Murth*>(param);
+  m->process_raw_midi(data, size);
+}
+
 Viewport::Viewport(IViewportController *controller, ISource *source)
   : controller_(controller)
   , viewport_proxy_(this) // \fixme incorrect! 'this' is not ready yet!
   , sound_(synth_callback, &murth_)
+  , midi_(midi_callback, &murth_)
 {
 
 /*
@@ -101,31 +108,58 @@ Viewport::Viewport(IViewportController *controller, ISource *source)
   delete surf;
   */
   
-  static const char *sadness =
-" .mixer "
-" load0 "
-" loop: "
-" 0.02 fadd "
-" fphase "
-" dup fph2rad fsin dup "
-" 2 yield "
-" :loop jmp ";
+  murth_program();
 
-  shmach::Ashembler ashm;
+  midi_.start();
+  sound_.start();
+  murth_.init(sound_.samplerate());
+}
+
+void Viewport::murth_program() {
+  kapusha::io::IFile::shared file(kapusha::io::IFilesystem::create_native()->open_file(...));
+  KP_ASSERT(file);
+  kapusha::io::buffered_stream_t stream;
+  file->stream_chunk(stream, 0);
+  kapusha::core::buffer_t buffer;
+  while(stream.status() == kapusha::io::buffered_stream_t::status_e::ok) {
+    buffer.append(stream.cursor(), stream.left());
+    stream.advance(stream.left());
+  }
+
+  auto prog = ashm_.parse(buffer.data(), static_cast<uint32_t>(buffer.size()));
   
-  auto prog = ashm.parse(sadness, static_cast<uint32_t>(strlen(sadness)));
-  
-  auto section = prog.sections.begin();
-  if (section == prog.sections.end()) {
+  if (!prog.error_desc.empty()) {
     printf("ERROR: %s\n", prog.error_desc.c_str());
     exit(-1);
   }
-
-  murth_.queue_mixer_reprogram(section->second.data(),
-    static_cast<uint32_t>(section->second.size()));
   
-  midi_.start();
-  sound_.start();
+  {
+    const auto section = prog.sections.find("mixer");
+    murth_.queue_mixer_reprogram(section->second.data(),
+      static_cast<uint32_t>(section->second.size()));
+  }
+  
+  {
+    const auto section = prog.sections.find("note");
+    murth_.queue_note_reprogram(section->second.data(),
+      static_cast<uint32_t>(section->second.size()));
+  }
+  
+  {
+    const auto section = prog.sections.find("ctl");
+    murth_.queue_ctl_reprogram(section->second.data(),
+      static_cast<uint32_t>(section->second.size()));
+  }
+  
+  for (int i = 0; i < SHMURTH_MAX_INSTRUMENTS; ++i) {
+    char buf[16];
+    snprintf(buf, 16, "instr%d", i);
+    const auto section = prog.sections.find(buf);
+    if (section != prog.sections.end())
+      murth_.queue_instrument_reprogram(i,
+        section->second.data(),
+        static_cast<uint32_t>(section->second.size()));
+  }
 }
 
 void Viewport::resize(vec2i size) {

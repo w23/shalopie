@@ -25,7 +25,13 @@ static void shmurth_func(struct shmach_object_t_ *obj,
     this->globals[core->sp[0].v.i] = core->sp[1];
     core->sp += 2;
     break;
-  case SHMURTH_FUNC_READ_TRACKS:
+  case SHMURTH_FUNC_READ_TRACKS: {
+      uint32_t index = core->sp->v.i;
+      assert(index < SHMURTH_MAX_TRACKS);
+      --core->sp;
+      core->sp[0].v.f = this->tracks[index * 2 + 0];
+      core->sp[1].v.f = this->tracks[index * 2 + 1];
+    }
     break;
   case SHMURTH_FUNC_SPAWN_INSTRUMENT: {
       const shmach_op_t *text = this->instruments[core->sp[0].v.i];
@@ -147,7 +153,7 @@ void shmurth_synth(shmurth_t *this, float *output_ilv, uint32_t samples) {
     memset(this->tracks, 0, sizeof(this->tracks));
     for (uint32_t i = 0; i < SHMURTH_MAX_ACTIVE_NOTES; ++i) {
       struct inststance_t_ *inst = this->inststances + i;
-      if (inst->note != 0) {
+      if (inst->core.text != NULL) {
         shmach_core_return_t r = shmach_core_run(&(inst->core), SHMURTH_MAX_INSTRUCTIONS);
         assert(r.result != shmach_core_return_result_hang);
         assert(r.count > 0);

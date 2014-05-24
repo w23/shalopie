@@ -5,9 +5,11 @@
 void Midi_CoreMidi::midiread_cb(const MIDIPacketList *pktlist,
                  void *readProcRefCon,
                  void *srcConnRefCon) {
+  Midi_CoreMidi *m = static_cast<Midi_CoreMidi*>(readProcRefCon);
   const MIDIPacket *packet = &pktlist->packet[0];
   for (int i = 0; i < pktlist->numPackets; ++i) {
     //murth_process_raw_midi(packet->data, packet->length);
+    m->midi_packet(packet->data, packet->length);
     printf("%d: ", packet->length);
     for (int i = 0; i < packet->length; ++i)
       printf("%02x ", packet->data[i]);
@@ -16,16 +18,17 @@ void Midi_CoreMidi::midiread_cb(const MIDIPacketList *pktlist,
   }
 }
 
-Midi_CoreMidi::Midi_CoreMidi() {}
+Midi_CoreMidi::Midi_CoreMidi(midi_callback_f func, void *param)
+  : param_(param), func_(func) {}
 Midi_CoreMidi::~Midi_CoreMidi() {}
 
 
 bool Midi_CoreMidi::start() {
   OSStatus err;
   MIDIPortRef mport;
-  err = MIDIClientCreate(CFSTR("murth"), 0, this, &mcli);
+  err = MIDIClientCreate(CFSTR("murth"), 0, NULL, &mcli);
   CHECK_ERR("MIDIClientCreate");
-  err = MIDIInputPortCreate(mcli, CFSTR("input"), midiread_cb, 0, &mport);
+  err = MIDIInputPortCreate(mcli, CFSTR("input"), midiread_cb, this, &mport);
   CHECK_ERR("MIDIInputPortCreate");
   
   unsigned long midi_sources = MIDIGetNumberOfSources();

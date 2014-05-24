@@ -6,6 +6,7 @@
 #include "Murth.h"
 #include "Sound_CoreAudio.h"
 #include "Midi_CoreMidi.h"
+#include "Ashembler.h"
 #include "ISource.h"
 
 using namespace kapusha;
@@ -20,6 +21,8 @@ public:
 private:
   void clear(vec4f color);
   render::Program::shared create_program();
+  
+  void murth_program();
 
   struct viewport_proxy_t {
     viewport_proxy_t(Viewport *master);
@@ -39,9 +42,11 @@ private:
   render::Batch::shared blit_;
   
   Murth murth_;
-  Midi_CoreMidi midi_;
   Sound_CoreAudio sound_;
+  Midi_CoreMidi midi_;
+  shmach::Ashembler ashm_;
   
   static const char *s_vertex_shader_;
   static void synth_callback(void *param, float *stream, uint32_t frames);
+  static void midi_callback(void *param, const void *data, uint32_t size);
 };

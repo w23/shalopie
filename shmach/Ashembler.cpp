@@ -106,6 +106,9 @@ namespace shmach {
     register_opcode("fsin", SHMACH_OP_FSIN);
     register_opcode("fphase", SHMACH_OP_FPHASE);
     register_opcode("fph2rad", SHMACH_OP_FPH2RAD);
+    register_opcode("get", SHMACH_OP_GET);
+    register_opcode("dupn", SHMACH_OP_DUPN);
+    register_opcode("dump", SHMACH_OP_DUMP);
   }
 
   bool Ashembler::register_opcode(const char *name, uint8_t opcode) {
@@ -221,9 +224,8 @@ namespace shmach {
           text[it.second + 1] = (addr & 0xff); addr >>= 8;
           text[it.second + 2] = (addr & 0xff); addr >>= 8;
           text[it.second + 3] = (addr & 0xff);
-          
-          prog.sections[std::move(section)] = std::move(text);
         }
+        prog.sections[std::move(section)] = std::move(text);
       }
 
       if (new_section.empty())

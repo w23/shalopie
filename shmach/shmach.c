@@ -40,9 +40,9 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
   shmach_core_return_t ret;
   ret.result = shmach_core_return_result_hang;
   while (max_cycles-- > 0) {
-    //for (shmach_value_t *s = core->sp; s < core->stack + SHMACH_MAX_STACK; ++s)
-      //printf("%d(%f) ", s->v.i, s->v.f);
-    //printf("\n");
+    /*for (shmach_value_t *s = core->sp; s < core->stack + SHMACH_MAX_STACK; ++s)
+      printf("%d(%f) ", s->v.i, s->v.f);
+    printf("\n");*/
     switch (core->text[core->pc++]) {
     case SHMACH_OP_NOP:
       break;
@@ -165,6 +165,26 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
       
     case SHMACH_OP_FPH2RAD:
       core->sp[0].v.f *= 3.1415926f;
+      break;
+      
+    case SHMACH_OP_GET: {
+        shmach_value_t v = core->sp[core->sp[0].v.i];
+        for (uint32_t i = core->sp[0].v.i; i > 0; --i) {
+          core->sp[i] = core->sp[i-1];
+        }
+        ++core->sp;
+        core->sp[0] = v;
+      }
+      break;
+      
+    case SHMACH_OP_DUPN:
+      core->sp[0] = core->sp[core->sp[0].v.i];
+      break;
+      
+    case SHMACH_OP_DUMP:
+      for (shmach_value_t *s = core->sp; s < core->stack + SHMACH_MAX_STACK; ++s)
+        printf("%d: %d(%08x), %f, %p\n", (int)(s - core->sp),
+          s->v.i, s->v.i, s->v.f, s->v.o);
       break;
       
     default:

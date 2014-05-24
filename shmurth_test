@@ -1,0 +1,28 @@
+.mixer          ; section mixer
+; [o_M]
+loop:
+;load0 dup 2 yield :loop jmp
+load0 2 3 dupn ocall 2 yield :loop jmp
+
+.note
+                ; o_M f_vel i_note i_inst
+pop             ; o_M f_vel i_note
+load0 load0     ; o_M f_vel i_note i_track=0 i_index=0
+3 6 get         ; o_M f_vel i_note i_track=0 i_index=0 4 6
+; SPAWN instr: [f_vel i_note i_track i_index 4 o_M]
+ocall
+load0 ret
+
+.ctl
+
+.instr0
+; [o_M f_vel i_note f_dphase]
+load0           ; [] 0
+dump
+loop:           ;
+2 dupn fadd     ; [o_M f_vel i_note f_dphase phase+f_dphase
+fphase
+dup fph2rad fsin dup
+2 yield
+:loop jmp
+

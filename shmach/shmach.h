@@ -7,7 +7,7 @@ extern "C" {
 #endif
   
 enum {
-  SHMACH_MAX_STACK = 4096,
+  SHMACH_MAX_STACK = 128,
   SHMACH_MAX_CORES = 16
 };
   
@@ -71,6 +71,7 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles);
 enum {
 // control
   SHMACH_OP_NOP,
+  SHMACH_OP_DUMP,
   SHMACH_OP_RET,
   SHMACH_OP_YIELD,
   SHMACH_OP_JMP,
@@ -81,6 +82,8 @@ enum {
   SHMACH_OP_DUP,
   SHMACH_OP_SWAP,
   SHMACH_OP_POP,
+  SHMACH_OP_GET,
+  SHMACH_OP_DUPN,
   // GET (N .<-. v, PUT (N v .->. v)
   // DUPN (N {.N.})
   // SWAPN (N {.N.<->.N.}

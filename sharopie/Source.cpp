@@ -15,7 +15,7 @@ kapusha::render::Shader *FileSource::new_shader() {
   if (!monitor_.changed())
     return nullptr;
 
-  kapusha::io::IFile::shared file(filesystem_->open_file(filename_));
+  kapusha::io::IFile::shared file(kapusha::io::IFilesystem::create_native()->open_file(filename_));
   if (!file)
     return nullptr;
 
