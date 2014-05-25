@@ -113,6 +113,7 @@ namespace shmach {
     register_opcode("loopdecnz", SHMACH_OP_LOOPDECNZ);
     register_opcode("fcmpgt", SHMACH_OP_FCMP_GT);
     register_opcode("fmul", SHMACH_OP_FMUL);
+    register_opcode("ndup", SHMACH_OP_NDUP);
   }
 
   bool Ashembler::register_opcode(const char *name, uint8_t opcode) {

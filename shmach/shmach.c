@@ -216,6 +216,14 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
       ++core->sp;
       break;
       
+    case SHMACH_OP_NDUP: {
+        uint32_t count = core->sp[0].v.i;
+        core->sp -= count - 1;
+        for (uint32_t i = 0; i < count; ++i)
+          core->sp[i] = core->sp[i + count];
+      }
+      break;
+      
     default:
       printf("invalid opcode %02x @ %d\n", core->text[core->pc-1], core->pc-1);
       exit(-1);

@@ -85,7 +85,8 @@ enum {
   SHMACH_OP_POP,
   SHMACH_OP_GET,
   SHMACH_OP_PUT,
-  SHMACH_OP_DUPN,
+  SHMACH_OP_DUPN, // duplicate one from depth
+  SHMACH_OP_NDUP, // duplicate N from top
   // GET (N .<-. v, PUT (N v .->. v)
   // DUPN (N {.N.})
   // SWAPN (N {.N.<->.N.}

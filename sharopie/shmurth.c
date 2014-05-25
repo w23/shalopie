@@ -155,6 +155,7 @@ void shmurth_note(shmurth_t *this,
 
 void shmurth_ctl(shmurth_t *this, uint32_t ctl, shmach_value_t value)
 {
+  if (this->ctl_core.text == NULL) return;
   shmach_value_t *v = shmach_core_reset(&this->ctl_core, 3);
   v[0].v.i = ctl;
   v[1] = value;

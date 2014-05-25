@@ -50,12 +50,20 @@ public:
   void process_raw_midi(const void *data, uint32_t size);
   void synthesize(float *lr_interleave, uint32_t frames);
   
-  bool get_event(uint32_t *type, shmach_value_t value);
+  bool get_event(uint32_t *type, shmach_value_t *value);
   
 private:
   shmurth_t sh_;
   
   Queue in_queue_;
+  
+  // WOW VERY ASYNC MANY NONBLOCKING MUCH BROKEN
+  struct {
+    uint32_t event_id;
+    shmach_value_t value;
+  } events_[16];
+  uint32_t eread_;
+  uint32_t ewrite_;
   
   Queue::carriage_t *mixer_program_;
   Queue::carriage_t *note_program_;

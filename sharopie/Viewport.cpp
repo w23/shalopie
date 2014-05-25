@@ -69,6 +69,8 @@ Viewport::Viewport(IViewportController *controller, ISource *source, const kapus
   , midi_(midi_callback, &murth_)
   , shader_src_(source)
 {
+  memset(params_, 0, sizeof(params_));
+
   render::Buffer *buf_rect = new render::Buffer();
   buf_rect->load(rect, sizeof rect);
 
@@ -196,6 +198,12 @@ void Viewport::draw(int ms, float dt) {
   }
   */
   
+  uint32_t event_id;
+  shmach_value_t value;
+  while (murth_.get_event(&event_id, &value))
+    if (event_id < 16)
+      params_[event_id] = value.v.f;
+  
   render::Shader *new_shader = shader_src_->new_shader();
   if (new_shader) {
     L("applying new shader");
@@ -209,6 +217,7 @@ void Viewport::draw(int ms, float dt) {
   fullscreen_->material()->set_uniform("uf_time", ms / 1000.f);
   fullscreen_->material()->set_uniform("us2_noise", sampler_noise_);
   fullscreen_->material()->set_uniform("uv2_resolution", vec2f(size_)*.5f);
+  fullscreen_->material()->set_uniform("um4_params", math::mat4f(params_));
 
   framebuffer_->bind();
   fullscreen_->draw();

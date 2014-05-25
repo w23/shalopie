@@ -183,9 +183,26 @@ void Murth::synthesize(float *lr_interleave, uint32_t frames) {
   shmurth_synth(&sh_, lr_interleave, frames);
 }
 
+bool Murth::get_event(uint32_t *type, shmach_value_t *value) {
+// WOW VERY ASYNC MANY NONBLOCKING MUCH BROKEN
+  while (eread_ != ewrite_) {
+    uint32_t i = (eread_++)%16;
+    *type = events_[i].event_id;
+    *value = events_[i].value;
+    return true;
+  }
+  return false;
+}
+
 void Murth::emit_event(uint32_t event_id, uint32_t count, shmach_value_t *values)
 {
-  // \todo
+// WOW VERY ASYNC MANY NONBLOCKING MUCH BROKEN
+  uint32_t i = (ewrite_++)%16;
+  events_[i].event_id = event_id;
+  if (count > 0)
+    events_[i].value = values[0];
+  else
+    events_[i].value.v.i = 0;
 }
 
 void Murth::murth_emit_event(struct shmurth_t_ *,

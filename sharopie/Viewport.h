@@ -51,4 +51,8 @@ private:
   
   static void synth_callback(void *param, float *stream, uint32_t frames);
   static void midi_callback(void *param, const void *data, uint32_t size);
+  
+  
+  // OGH
+  float params_[16];
 };
