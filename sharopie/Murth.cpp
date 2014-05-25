@@ -1,5 +1,6 @@
 #include <libkern/OSAtomic.h>
 #include <cstring>
+#include <cassert>
 #include "Murth.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -56,6 +57,7 @@ enum {
   CarriageTypeProgNote,
   CarriageTypeProgCtl,
   CarriageTypeProgInstr,
+  CarriageTypeProgSeq,
   CarriageTypeNote,
   CarriageTypeCtl
 };
@@ -64,8 +66,9 @@ Murth::Murth()
   : mixer_program_(nullptr)
   , note_program_(nullptr)
   , ctl_program_(nullptr)
-  , instrument_program_(nullptr)
 {
+  memset(instrument_programs_, 0, sizeof(instrument_programs_));
+  memset(sequencer_programs_, 0, sizeof(sequencer_programs_));
 }
 
 Murth::~Murth() {
@@ -90,7 +93,14 @@ void Murth::queue_ctl_reprogram(shmach_op_t *section, uint32_t size) {
 
 void Murth::queue_instrument_reprogram(uint32_t index, shmach_op_t *section, uint32_t size)
 {
+  assert(index < SHMURTH_MAX_INSTRUMENTS);
   in_queue_.send(CarriageTypeProgInstr, index, section, size);
+}
+
+void Murth::queue_sequencer_reprogram(uint32_t index, shmach_op_t *section, uint32_t size)
+{
+  assert(index < SHMURTH_MAX_SEQUENCERS);
+  in_queue_.send(CarriageTypeProgSeq, index, section, size);
 }
 
 void Murth::process_raw_midi(const void *data, uint32_t size) {
@@ -146,9 +156,14 @@ void Murth::synthesize(float *lr_interleave, uint32_t frames) {
       shmurth_set_ctl_section(&sh_, static_cast<const shmach_section_t>(c->data()));
       break;
     case CarriageTypeProgInstr:
-      in_queue_.carriage_return(instrument_program_);
-      instrument_program_ = c;
+      in_queue_.carriage_return(instrument_programs_[c->param()]);
+      instrument_programs_[c->param()] = c;
       shmurth_set_instrument_section(&sh_, c->param(), static_cast<const shmach_section_t>(c->data()));
+      break;
+    case CarriageTypeProgSeq:
+      in_queue_.carriage_return(sequencer_programs_[c->param()]);
+      sequencer_programs_[c->param()] = c;
+      shmurth_set_sequencer_section(&sh_, c->param(), static_cast<const shmach_section_t>(c->data()));
       break;
     case CarriageTypeNote:
       shmurth_note(&sh_, c->param() >> 16, c->param() & 0xff,
@@ -170,6 +185,7 @@ void Murth::synthesize(float *lr_interleave, uint32_t frames) {
 
 void Murth::emit_event(uint32_t event_id, uint32_t count, shmach_value_t *values)
 {
+  // \todo
 }
 
 void Murth::murth_emit_event(struct shmurth_t_ *,

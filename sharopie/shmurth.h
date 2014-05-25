@@ -11,6 +11,7 @@ enum {
   SHMURTH_MAX_TRACKS = 8,
   SHMURTH_MAX_INSTRUMENTS = 8,
   SHMURTH_MAX_ACTIVE_NOTES = 16,
+  SHMURTH_MAX_SEQUENCERS = 8,
   SHMURTH_MAX_INSTRUCTIONS = 128
 };
 
@@ -29,12 +30,14 @@ struct shmurth_t_ {
   shmach_core_t note_core;
   shmach_core_t ctl_core;
   shmach_core_t mixer_core;
+  shmach_core_t seqencer_cores[SHMURTH_MAX_SEQUENCERS];
   shmach_section_t instruments[SHMURTH_MAX_INSTRUMENTS];
   struct inststance_t_ {
     uint32_t note;
     uint32_t track;
     shmach_core_t core;
   } inststances[SHMURTH_MAX_ACTIVE_NOTES];
+  uint32_t frames_to_next_tick;
 };
 
 typedef struct shmurth_t_ shmurth_t;
@@ -47,6 +50,8 @@ void shmurth_set_ctl_section(shmurth_t *shmurth, shmach_section_t section);
 void shmurth_set_mixer_section(shmurth_t *shmurth, shmach_section_t section);
 void shmurth_set_instrument_section(shmurth_t *shmurth,
   uint32_t instrument, shmach_section_t section);
+void shmurth_set_sequencer_section(shmurth_t *shmurth,
+  uint32_t sequencer, shmach_section_t section);
 void shmurth_silence(shmurth_t *shmurth);
 void shmurth_note(shmurth_t *shmurth,
   uint32_t inst_id, uint32_t note, float velocity);

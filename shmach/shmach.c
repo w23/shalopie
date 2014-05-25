@@ -68,10 +68,10 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
       ret.result = shmach_core_return_result_yield;
       core->sp += ret.count + 1;
       return ret;
-    case SHMACH_OP_JMP: // expects [ADDR]
+    case SHMACH_OP_JMP: // expects <ADDR]
       core->pc = (core->sp++)->v.i;
       break;
-    case SHMACH_OP_JNZ: // expects [ADDR ZCHECK]
+    case SHMACH_OP_JNZ: // expects <ADDR ZCHECK]
       if (core->sp[1].v.i != 0)
         core->pc = core->sp->v.i;
       core->sp += 2;
@@ -176,6 +176,16 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
         core->sp[0] = v;
       }
       break;
+    
+    case SHMACH_OP_PUT: {
+      uint32_t depth = core->sp[0].v.i;
+      ++core->sp;
+      shmach_value_t v = core->sp[0];
+      for (uint32_t i = 0; i < depth; ++i)
+        core->sp[i] = core->sp[i+1];
+      core->sp[depth] = v;
+    }
+    break;
       
     case SHMACH_OP_DUPN:
       core->sp[0] = core->sp[core->sp[0].v.i];
@@ -185,6 +195,25 @@ shmach_core_return_t shmach_core_run(shmach_core_t *core, uint32_t max_cycles) {
       for (shmach_value_t *s = core->sp; s < core->stack + SHMACH_MAX_STACK; ++s)
         printf("%d: %d(%08x), %f, %p\n", (int)(s - core->sp),
           s->v.i, s->v.i, s->v.f, s->v.o);
+      break;
+      
+    case SHMACH_OP_LOOPDECNZ:
+      if ((core->sp[1].v.i--) > 1) {
+        //core->sp[1].v.i--;
+        core->pc = core->pc - core->sp[0].v.i - 2;
+      } else
+        ++core->sp;
+      ++core->sp;
+      break;
+      
+    case SHMACH_OP_FMUL:
+      core->sp[1].v.f *= core->sp[0].v.f;
+      ++core->sp;
+      break;
+      
+    case SHMACH_OP_FCMP_GT:
+      core->sp[1].v.i = (core->sp[0].v.f > core->sp[1].v.f);
+      ++core->sp;
       break;
       
     default:

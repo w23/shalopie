@@ -45,6 +45,7 @@ public:
   void queue_note_reprogram(shmach_op_t *section, uint32_t size);
   void queue_ctl_reprogram(shmach_op_t *section, uint32_t size);
   void queue_instrument_reprogram(uint32_t index, shmach_op_t *section, uint32_t size);
+  void queue_sequencer_reprogram(uint32_t index, shmach_op_t *section, uint32_t size);
   
   void process_raw_midi(const void *data, uint32_t size);
   void synthesize(float *lr_interleave, uint32_t frames);
@@ -59,7 +60,8 @@ private:
   Queue::carriage_t *mixer_program_;
   Queue::carriage_t *note_program_;
   Queue::carriage_t *ctl_program_;
-  Queue::carriage_t *instrument_program_;
+  Queue::carriage_t *instrument_programs_[SHMURTH_MAX_INSTRUMENTS];
+  Queue::carriage_t *sequencer_programs_[SHMURTH_MAX_SEQUENCERS];
   
   void emit_event(uint32_t event_id, uint32_t count, shmach_value_t *values);
   static void murth_emit_event(struct shmurth_t_ *,

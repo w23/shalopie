@@ -107,8 +107,12 @@ namespace shmach {
     register_opcode("fphase", SHMACH_OP_FPHASE);
     register_opcode("fph2rad", SHMACH_OP_FPH2RAD);
     register_opcode("get", SHMACH_OP_GET);
+    register_opcode("put", SHMACH_OP_PUT);
     register_opcode("dupn", SHMACH_OP_DUPN);
     register_opcode("dump", SHMACH_OP_DUMP);
+    register_opcode("loopdecnz", SHMACH_OP_LOOPDECNZ);
+    register_opcode("fcmpgt", SHMACH_OP_FCMP_GT);
+    register_opcode("fmul", SHMACH_OP_FMUL);
   }
 
   bool Ashembler::register_opcode(const char *name, uint8_t opcode) {

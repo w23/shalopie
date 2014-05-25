@@ -117,6 +117,22 @@ void shmurth_set_instrument_section(shmurth_t *this,
   this->instruments[instrument] = section;
 }
 
+void shmurth_set_sequencer_section(shmurth_t *this,
+  uint32_t sequencer, shmach_section_t section)
+{
+  assert(sequencer < SHMURTH_MAX_SEQUENCERS);
+  this->seqencer_cores[sequencer].text = section;
+  shmach_value_t *v = shmach_core_reset(this->seqencer_cores + sequencer, 1);
+  v[0].v.o = &this->o;
+  
+  // \todo synchronize properly
+  for (uint32_t i = 0; i < SHMURTH_MAX_SEQUENCERS; ++i) {
+    shmach_value_t *v = shmach_core_reset(this->seqencer_cores + i, 1);
+    v[0].v.o = &this->o;
+  }
+  this->frames_to_next_tick = 0;
+}
+
 void shmurth_silence(shmurth_t *this) {
   shmach_core_reset(&this->mixer_core, 0);
   for (uint32_t i = 0; i < SHMURTH_MAX_ACTIVE_NOTES; ++i) {
@@ -150,11 +166,28 @@ void shmurth_ctl(shmurth_t *this, uint32_t ctl, shmach_value_t value)
 
 void shmurth_synth(shmurth_t *this, float *output_ilv, uint32_t samples) {
   while (samples-- != 0) {
+    if (this->frames_to_next_tick-- == 0) {
+      for (uint32_t j = 0; j < SHMURTH_MAX_SEQUENCERS; ++j)
+        if (this->seqencer_cores[j].text != NULL) {
+          shmach_core_return_t r = shmach_core_run(
+            this->seqencer_cores + j, SHMURTH_MAX_INSTRUCTIONS);
+          assert(r.result != shmach_core_return_result_hang);
+          if (r.result == shmach_core_return_result_return)
+            this->seqencer_cores[j].text = NULL; // stop
+          assert(r.count == 0);
+        }
+      this->frames_to_next_tick = 4096; // \todo controllable
+    }
+
     memset(this->tracks, 0, sizeof(this->tracks));
     for (uint32_t i = 0; i < SHMURTH_MAX_ACTIVE_NOTES; ++i) {
       struct inststance_t_ *inst = this->inststances + i;
       if (inst->core.text != NULL) {
         shmach_core_return_t r = shmach_core_run(&(inst->core), SHMURTH_MAX_INSTRUCTIONS);
+        if (r.result == shmach_core_return_result_return) {
+          inst->core.text = NULL;
+          continue;
+        }
         assert(r.result != shmach_core_return_result_hang);
         assert(r.count > 0);
         assert(r.count < 3);
