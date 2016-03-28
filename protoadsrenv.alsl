@@ -28,11 +28,11 @@ DECLARE_STATE(float, level, 1.f);
 
 void synth() {
 	for (int i = 0; i < al_FrameSize; ++i) {
-		out[i] *= adsr(in[i]);
+		out[i] = in[i] * adsr();
 	}
 }
 
-float adsr(float sample) {
+float adsr() {
 	if(state != STATE_OFF && state != STATE_SUSTAIN) {
 		level *= falloff;
 		duration--;
