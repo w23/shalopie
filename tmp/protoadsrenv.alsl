@@ -1,0 +1,87 @@
+DECLARE_INPUT(float, attack, 1.f);
+DECLARE_INPUT(float, decay, 1.f);
+DECLARE_INPUT(float, sustain, 1.f);
+DECLARE_INPUT(float, release, 1.f);
+
+// How about DECLARE_INPUT(float4, adsr, float4(1.f))?
+// const int al_FrameSize;
+// const int al_Samplerate;
+
+DECLARE_INPUT(frame_t, in);
+DECLARE_OUTPUT(frame_t, out);
+
+#define STATE_OFF 0
+#define STATE_ATTACK 1
+#define STATE_DECAY 2
+#define STATE_SUSTAIN 3
+#define STATE_RELEASE 4
+
+DECLARE_STATE(char, state, STATE_OFF);
+DECLARE_STATE(long, duration, 0); // in samples
+DECLARE_STATE(float, falloff, 1.f);
+DECLARE_STATE(float, level, 1.f);
+
+#define EPSILON 1e-3f
+#define EXP_FALLOFF(START, END) (duration == 0) ? 1.f : (1.f + (log(END) - log(START)) / duration)
+
+// TODO: retrigger ADSR? Gate?
+
+void synth() {
+	for (int i = 0; i < al_FrameSize; ++i) {
+		out[i] = in[i] * adsr();
+	}
+}
+
+float adsr() {
+	if(state != STATE_OFF && state != STATE_SUSTAIN) {
+		level *= falloff;
+		duration--;
+	}
+	
+	if (duration != 0) {
+		switch (state) {
+			case STATE_ATTACK: set_state(STATE_DECAY); break;
+			case STATE_DECAY: set_state(STATE_SUSTAIN); break;
+			case STATE_RELEASE: set_state(STATE_OFF); break;
+		}
+	}
+	
+	return level;
+}
+
+void set_state(int new_state) {
+	if(state == new_state) return;
+	
+	state = new_state;
+	duration = 0;
+	
+	switch (state) {
+		case STATE_OFF: {
+			level = 0.f;
+			falloff = 0.f;
+		} break;
+		
+		case STATE_ATTACK: {
+			level = max(level, EPSILON);
+			duration = (long)(attack * al_Samplerate);
+			falloff = EXP_FALLOFF(level, 1.f);
+		} break;
+		
+		case STATE_DECAY: {
+			level = 1.f;
+			duration = (long)(decay * al_Samplerate);
+			falloff = EXP_FALLOFF(level, sustain);
+		} break;
+		
+		case STATE_SUSTAIN: {
+			level = sustain;
+			falloff = 1.f;
+		} break;
+		
+		case STATE_RELEASE: {
+			level = 1.f;
+			duration = (long)(release * al_Samplerate);
+			falloff = EXP_FALLOFF(level, EPSILON);
+		} break;
+	}
+}
